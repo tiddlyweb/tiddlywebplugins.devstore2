@@ -10,3 +10,20 @@ then see the changes.
 This store aims to fix that by providing a wrapper store that on 
 tiddler_get first looks in a configured dir for an appropriate file
 to satisfy the request.
+
+Configuration is as follows:
+
+    config = {
+        'server_store': ['tiddlywebplugins.devstore2', {'devstore_root':
+            './src'}],
+        'wrapped_devstore': ['text', {'store_root': 'store'}],
+        'log_level': 'DEBUG',
+        }
+
+Where devstore_root is either an absolute path or relative to whatever
+the PWD is in the process using the config.
+
+devstore uses tiddlywebplugins.twimport's url_to_tiddler and thus will
+read files ending in .tid as a tiddler, .js as a javascript file or treat
+other extensions as binary or pseuod-binary tiddlers.
+
