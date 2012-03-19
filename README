@@ -1,0 +1,12 @@
+A store for TiddlyWeb for use in development.
+
+A common problem with complicated web apps built on top of TiddlySpace
+is that it is hard to do live development on a test or dev instance.
+While the desired experience is to be able to edit tiddlers on the file
+system and see those changes in the instance instantly, the current
+habit is to make the changes, update the package, update the instance
+then see the changes.
+
+This store aims to fix that by providing a wrapper store that on 
+tiddler_get first looks in a configured dir for an appropriate file
+to satisfy the request.
