@@ -31,22 +31,22 @@ class Store(StorageInterface):
 
     # XXX do this automagic?
     def list_recipes(self):
-        return self.wrapped_store.list_recipes()
+        return self.wrapped_storage.list_recipes()
 
     def list_bags(self):
-        return self.wrapped_store.list_bags()
+        return self.wrapped_storage.list_bags()
 
-    def list_bag_tiddlers(self):
-        return self.wrapped_store.list_bag_tiddlers()
+    def list_bag_tiddlers(self, bag):
+        return self.wrapped_storage.list_bag_tiddlers(bag)
 
     def list_users(self):
-        return self.wrapped_store.list_users()
+        return self.wrapped_storage.list_users()
 
     def list_tiddler_revisions(self):
-        return self.wrapped_store.list_tiddler_revisions()
+        return self.wrapped_storage.list_tiddler_revisions()
 
     def search(self, search_query):
-        return self.wrapped_store.search(search_query)
+        return self.wrapped_storage.search(search_query)
 
     def user_get(self, user):
         return self.wrapped_storage.user_get(user)
