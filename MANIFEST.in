@@ -1,2 +1,3 @@
 recursive-include test *
-include README Makefile
+recursive-include src *
+include README Makefile tiddlywebconfig.py mangler.py

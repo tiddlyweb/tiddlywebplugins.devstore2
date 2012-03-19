@@ -1,9 +1,8 @@
-# YOU NEED TO EDIT THESE
-AUTHOR = 'Python Person'
-AUTHOR_EMAIL = 'python@example.org'
-NAME = 'tiddlywebplugins.example'
-DESCRIPTION = 'The short description of my project'
-VERSION = '0.9'
+AUTHOR = 'Chris Dent'
+AUTHOR_EMAIL = 'cdent@peermore.com'
+NAME = 'tiddlywebplugins.devstore2'
+DESCRIPTION = 'Development oriented store that wraps another.'
+VERSION = '0.1'
 
 
 import os
