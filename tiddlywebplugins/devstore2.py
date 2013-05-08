@@ -42,8 +42,8 @@ class Store(StorageInterface):
     def list_users(self):
         return self.wrapped_storage.list_users()
 
-    def list_tiddler_revisions(self):
-        return self.wrapped_storage.list_tiddler_revisions()
+    def list_tiddler_revisions(self, tiddler):
+        return self.wrapped_storage.list_tiddler_revisions(tiddler)
 
     def search(self, search_query):
         return self.wrapped_storage.search(search_query)
