@@ -67,7 +67,10 @@ class Store(StorageInterface):
         return self.wrapped_storage.recipe_delete(recipe)
 
     def bag_get(self, bag):
-        return self.wrapped_storage.bag_get(bag)
+        dev_bag = self._get_bag(bag)
+        if not dev_bag:
+            return self.wrapped_storage.bag_get(bag)
+        return dev_bag
 
     def bag_put(self, bag):
         return self.wrapped_storage.bag_put(bag)
@@ -89,6 +92,13 @@ class Store(StorageInterface):
         if not dev_tiddler:
             return self.wrapped_storage.tiddler_get(tiddler)
         return dev_tiddler
+
+    def _get_bag(self, bag):
+        filepath = os.path.join(self._base, encode_name(bag.name))
+        if os.path.isdir(filepath):
+            return bag
+        else:
+            return None
 
     def _get_tiddler(self, tiddler):
         bag = tiddler.bag
