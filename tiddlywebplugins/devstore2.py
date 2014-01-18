@@ -96,6 +96,9 @@ class Store(StorageInterface):
     def _get_bag(self, bag):
         filepath = os.path.join(self._base, encode_name(bag.name))
         if os.path.isdir(filepath):
+            bag.policy.write = ['NONE']
+            bag.policy.create = ['NONE']
+            bag.policy.delete = ['NONE']
             return bag
         else:
             return None
