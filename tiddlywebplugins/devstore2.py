@@ -6,7 +6,7 @@ import os
 
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.web.util import encode_name
-from tiddlyweb.store import Store as StoreBoss
+from tiddlyweb.store import Store as StoreBoss, NoBagError
 from tiddlyweb.stores import StorageInterface
 
 from tiddlywebplugins.twimport import url_to_tiddler
@@ -37,10 +37,12 @@ class Store(StorageInterface):
         return self.wrapped_storage.list_bags()
 
     def list_bag_tiddlers(self, bag):
-        dev_tiddlers = self._get_bag_tiddlers(bag)
-        if not dev_tiddlers:
+        filepath = os.path.join(self._base, encode_name(bag.name))
+        if os.path.isdir(filepath):
+            dev_tiddlers = self._get_bag_tiddlers(bag)
+            return dev_tiddlers
+        else:
             return self.wrapped_storage.list_bag_tiddlers(bag)
-        return dev_tiddlers
 
     def list_users(self):
         return self.wrapped_storage.list_users()
