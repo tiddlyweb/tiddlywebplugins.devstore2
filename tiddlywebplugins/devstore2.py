@@ -1,12 +1,10 @@
 """
 experimenting with a wrapper store for dev.
-
-This assumes that the wrapped store has references to the tiddlers
-in src, thus can list_bag_tiddlers correctly.
 """
 
 import os
 
+from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.web.util import encode_name
 from tiddlyweb.store import Store as StoreBoss
 from tiddlyweb.stores import StorageInterface
@@ -14,6 +12,8 @@ from tiddlyweb.stores import StorageInterface
 from tiddlywebplugins.twimport import url_to_tiddler
 
 from urllib2 import URLError
+
+from tiddlyweb.fixups import unquote
 
 KNOWN_EXTENSIONS = ['', '.tid', '.js']
 
@@ -37,7 +37,10 @@ class Store(StorageInterface):
         return self.wrapped_storage.list_bags()
 
     def list_bag_tiddlers(self, bag):
-        return self.wrapped_storage.list_bag_tiddlers(bag)
+        dev_tiddlers = self._get_bag_tiddlers(bag)
+        if not dev_tiddlers:
+            return self.wrapped_storage.list_bag_tiddlers(bag)
+        return dev_tiddlers
 
     def list_users(self):
         return self.wrapped_storage.list_users()
@@ -102,6 +105,16 @@ class Store(StorageInterface):
             return bag
         else:
             return None
+
+    def _get_bag_tiddlers(self, bag):
+        filepath = os.path.join(self._base, encode_name(bag.name))
+        if os.path.isdir(filepath):
+            filenames = os.listdir(filepath)
+            for name in filenames:
+                name = unquote(name)
+                name = name.rsplit('.', 1)[0]
+                tiddler = Tiddler(name, bag.name)
+                yield tiddler
 
     def _get_tiddler(self, tiddler):
         bag = tiddler.bag
