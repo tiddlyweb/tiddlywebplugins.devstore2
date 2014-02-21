@@ -104,6 +104,7 @@ class Store(StorageInterface):
             bag.policy.write = ['NONE']
             bag.policy.create = ['NONE']
             bag.policy.delete = ['NONE']
+            bag.policy.manage = ['NONE']
             return bag
         else:
             return None

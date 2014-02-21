@@ -2,7 +2,7 @@ AUTHOR = 'Chris Dent'
 AUTHOR_EMAIL = 'cdent@peermore.com'
 NAME = 'tiddlywebplugins.devstore2'
 DESCRIPTION = 'Development oriented store that wraps another.'
-VERSION = '0.5'
+VERSION = '0.5.1'
 
 
 import os
